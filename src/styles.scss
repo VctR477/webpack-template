@@ -62,6 +62,12 @@ h1 {
 	background: $bgColor;
 }
 
+.menu {
+	font-family: Arial;
+	line-height: 1.5;
+	color: $blackColor;
+}
+
 @keyframes blick {
 	0% {
 		background-position: -100px;

@@ -72,6 +72,7 @@ class Snake {
 		this.drawGrid();
 		this.createFirstSnakePosition();
 		this.drawSnake();
+		this.notStarted = true;
 	}
 
 	drawGrid() {
