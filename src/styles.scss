@@ -1,19 +1,78 @@
-@import './scss/index';
+$blackColor: #333;
+$grayColor: #929292;
+$bgBodyColor: #f0f8ff;
+$bgColor: #fff;
+$darkColor: #000;
+
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: $bgBodyColor;
+	padding: 5px;
+}
 
 h1 {
-	color: red;
-	display: flex;
+	margin: 0 0 5px 0;
+	padding: 16px 16px;
+	color: $blackColor;
+	text-align: center;
 	user-select: none;
+	border: 1px dashed $blackColor;
+	background: $bgColor;
+
+	.caption {
+		display: inline-block;
+		border: 1px solid $darkColor;
+		line-height: 1.8em;
+		padding: 0 100px;
+		border-radius: 40px;
+		position: relative;
+		transition: transform .4s, box-shadow .4s;
+
+		&::after {
+			content: 'by Viktor Klimov';
+			color: $grayColor;
+			position: absolute;
+			top: -.3em;
+			right: 12%;
+			font-size: .3em;
+			line-height: normal;
+			background: $bgColor;
+			padding: 0 5px;
+		}
+
+		&:hover {
+			transform: translate(-5px, -5px);
+			box-shadow: 6px 6px 0 $blackColor;
+			animation: blick 1.5s ease;
+			background-repeat: no-repeat;
+		}
+	}
+
 }
 
-h2 {
-	color: brown;
+.wrapper {
 	display: flex;
-	user-select: none;
+	justify-content: space-between;
+	border: 1px dashed $blackColor;
+	padding: 5px;
+	background: $bgColor;
 }
 
-h3 {
-	color: gray;
-	display: flex;
-	user-select: none;
+@keyframes blick {
+	0% {
+		background-position: -100px;
+	}
+
+	1% {
+		background-image: linear-gradient(65deg, transparent 20%, rgba(255, 255, 255, 0.2) 20%, rgba(192, 192, 192, 0.3) 37%, transparent 37%, transparent 100%);
+	}
+
+	100% {
+		background-position: 300px;
+		background-image: linear-gradient(65deg, transparent 20%, rgba(255, 255, 255, 0.2) 20%, rgba(192, 192, 192, 0.3) 37%, transparent 37%, transparent 100%);
+	}
 }

@@ -1,7 +1,7 @@
 {
-  "name": "webpack-template",
+  "name": "snake-js",
   "version": "1.0.0",
-  "description": "My webpack build project",
+  "description": "My first canvas game",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --mode development",

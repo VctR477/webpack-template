@@ -1,7 +1,7 @@
 import randomInteger from './random-int';
 
-const DEFAULT_CANVAS_WIDTH = 600;
-const DEFAULT_CANVAS_HEIGHT = 600;
+const DEFAULT_CANVAS_WIDTH = 500;
+const DEFAULT_CANVAS_HEIGHT = 500;
 const DEFAULT_CANVAS_BGCOLOR = '#cecece';
 const DEFAULT_CANVAS_BORDER = '1px solid #000';
 const SIZE_OF_SQUARE = 30;
@@ -223,7 +223,7 @@ class Snake {
 		if (x === xLimitRight || x === xLimitLeft || y === yLimitBottom || y === yLimitTop) {
 			this.gameOver = true;
 			/** TODO сделать нормальный попап */
-			alert('GAME_OVER');
+			// alert('GAME_OVER');
 		}
 	}
 
@@ -235,7 +235,7 @@ class Snake {
 			if (x === snake[ i ][ 0 ] && y === snake[ i ][ 1 ]) {
 				this.gameOver = true;
 			/** TODO сделать нормальный попап */
-			alert('GAME_OVER');
+			// alert('GAME_OVER');
 			}
 		}
 	}

@@ -44,16 +44,18 @@ function turn(event) {
 };
 
 
+window.snake = new Snake();
+snake.init();
+
 const btn = document.getElementById('btn');
 btn.addEventListener('click', event => {
 	event.currentTarget.innerText = 'restart';
-	if ('snake' in window) {
-		clearTimeout(snake.game);
-		delete window.snake;
-		console.log('restart');
-	}
-	window.snake = new Snake();
-	snake.init();
+	// if ('snake' in window) {
+	// 	clearTimeout(snake.game);
+	// 	document.removeEventListener('keydown', turn);
+	// 	delete window.snake;
+	// }
+	
 	document.addEventListener('keydown', turn, false);
 	gameStart(snake);
 });
