@@ -1,0 +1,43 @@
+{
+  "name": "webpack-template",
+  "version": "1.0.0",
+  "description": "My webpack build project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Viktor Klimov",
+  "license": "MIT",
+  "browserslist": [
+    "last 4 versions",
+    "iOS >= 8",
+    "Chrome >= 26",
+    "Android >= 4.1",
+    "Firefox >= 20",
+    "Safari >= 6.1",
+    "Opera >= 12.1",
+    "Explorer >= 10",
+    "Edge >= 12"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "cssnano": "^4.1.10",
+    "mini-css-extract-plugin": "^0.7.0",
+    "node-sass": "^4.12.0",
+    "path": "^0.12.7",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {}
+}
