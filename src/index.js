@@ -23,6 +23,7 @@ function gameEngine(snake) {
 	}, ONE_SECOND / FPS);
 	if (snake.gameOver) {
 		clearTimeout(snake.game);
+		gameOver();
 	}
 };
 
@@ -45,14 +46,14 @@ function turn(event) {
 	}
 };
 
-
-window.snake = new Snake();
-snake.init();
+const cover = document.getElementById('cover');
 
 function start() {
 	document.addEventListener('keydown', turn, false);
 	snake.notStarted = false;
 	gameEngine(snake);
+	cover.classList.add('hide');
+	cover.innerHTML = '<span>PAUSE</span>';
 }
 
 function pause() {
@@ -63,6 +64,7 @@ function pause() {
 		clearTimeout(snake.game);
 		snake.paused = true;
 		document.removeEventListener('keydown', turn);
+		cover.classList.remove('hide');
 	}
 }
 
@@ -72,15 +74,25 @@ function reset() {
 		document.removeEventListener('keydown', turn);
 		delete window.snake;
 		window.snake = new Snake();
-		snake.init();
+		cover.classList.remove('hide');
+		cover.innerHTML = '<span>Press SPACE to start</span>';
 	}
 }
+
+function gameOver() {
+	cover.classList.remove('hide');
+	cover.innerHTML = `<span>GAME OVER<em>score: 2334</em></span>`;
+}
+
+window.snake = new Snake();
 
 document.addEventListener('keyup', event => {
 	switch (event.keyCode) {
 		case KEY_CODE_SPACE:
 			if (snake && snake.notStarted) {
 				start();
+			} else if (snake.gameOver) {
+				reset();
 			} else {
 				pause();
 			}

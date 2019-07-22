@@ -39,6 +39,8 @@ class Snake {
 		this.targetShow = false;
 		this.targetPosition = [];
 		this.gameOver = false;
+
+		this.init();
 	}
 
 	prepareCanvas() {
@@ -240,7 +242,6 @@ class Snake {
 			}
 		}
 	}
-
 }
 
 export default Snake;

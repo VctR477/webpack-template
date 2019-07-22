@@ -82,3 +82,73 @@ h1 {
 		background-image: linear-gradient(65deg, transparent 20%, rgba(255, 255, 255, 0.2) 20%, rgba(192, 192, 192, 0.3) 37%, transparent 37%, transparent 100%);
 	}
 }
+
+.canvas-wrapper {
+	position: relative;
+
+	.canvas-cover {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		background: $darkColor;
+		opacity: .7;
+		animation: cover .3s ease-in;
+
+		span {
+			margin: auto;
+			font-size: 38px;
+			font-weight: bold;
+			color: $bgColor;
+			font-family: Arial;
+			white-space: nowrap;
+			position: relative;
+			animation: text .3s ease-in;
+
+			em {
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				transform: translateX(-50%);
+				font-size: 20px;
+				animation: mintext .3s ease-in;
+			}
+		}
+	}
+}
+
+@keyframes text {
+	0% {
+		font-size: 0;
+	}
+
+	100% {
+		font-size: 38px;
+	}
+}
+
+@keyframes mintext {
+	0% {
+		font-size: 0;
+	}
+
+	100% {
+		font-size: 20px;
+	}
+}
+
+@keyframes cover {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: .7;
+	}
+}
+
+.hide {
+	display: none !important;
+}
