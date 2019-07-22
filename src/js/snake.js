@@ -39,6 +39,7 @@ class Snake {
 		this.targetShow = false;
 		this.targetPosition = [];
 		this.gameOver = false;
+		this.score = 0;
 
 		this.init();
 	}
@@ -74,6 +75,7 @@ class Snake {
 		this.drawGrid();
 		this.createFirstSnakePosition();
 		this.drawSnake();
+		this.drawScore();
 		this.notStarted = true;
 	}
 
@@ -126,6 +128,13 @@ class Snake {
 		});
 	}
 
+	drawScore() {
+		const ctx = this.ctx;
+		ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+		ctx.font = '20px arial';
+		ctx.fillText(`score: ${this.score}`, 10, 30);
+	}
+
 	snakeOneStep() {
 		let direction = this.snake.direction;
 		const snakeHeadIndex = this.snake.position.length - 1;
@@ -160,6 +169,7 @@ class Snake {
 		const targetY = this.targetPosition[ 1 ] - this.props.lineWidth;
 		if (newXY[ 0 ] === targetX && newXY[ 1 ] === targetY) {
 			this.targetShow = false;
+			this.score += 1;
 		} else {
 			this.snake.position.shift();
 		}
@@ -171,6 +181,7 @@ class Snake {
 			this.clear();
 			this.drawSnake();
 			this.drawTarget();
+			this.drawScore();
 		}
 	}
 

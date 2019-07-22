@@ -81,7 +81,7 @@ function reset() {
 
 function gameOver() {
 	cover.classList.remove('hide');
-	cover.innerHTML = `<span>GAME OVER<em>score: 2334</em></span>`;
+	cover.innerHTML = `<span>GAME OVER<em>score: ${snake.score}</em></span>`;
 }
 
 window.snake = new Snake();
