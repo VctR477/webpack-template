@@ -14,6 +14,23 @@ const TOP = 'top';
 const BOTTOM = 'bottom';
 const TARGET_COLOR = '#0000ff';
 
+const IMAGE = {
+	headR: '/images/head-r.png',
+	headL: '/images/head-l.png',
+	headT: '/images/head-t.png',
+	headB: '/images/head-b.png',
+	tailR: '/images/tail-r.png',
+	tailL: '/images/tail-l.png',
+	tailT: '/images/tail-t.png',
+	tailB: '/images/tail-b.png',
+	turnBR: '/images/turn-b-r.png',
+	turnBL: '/images/turn-b-l.png',
+	turnTR: '/images/turn-t-r.png',
+	turnTL: '/images/turn-t-l.png',
+	vertical: '/images/vert.png',
+	horizontal: '/images/horz.png',
+};
+
 class Snake {
 	constructor(props) {
 		this.defaultProps = {
@@ -118,14 +135,94 @@ class Snake {
 	}
 
 	drawSnake() {
-		const size = this.snakeSize - this.props.lineWidth;
-		const ctx = this.ctx;
-		ctx.fillStyle = this.props.snakeColor;
-		this.snake.position.forEach(item => {
-			let x = item[ 0 ] + this.props.lineWidth;
-			let y = item[ 1 ] + this.props.lineWidth;
-			ctx.fillRect(x, y, size, size);
+		const size = this.snakeSize + this.props.lineWidth;
+		const snakeArr = this.snake.position.slice().reverse();
+		const snakeLastIdx = snakeArr.length - 1;
+		snakeArr.forEach((item, idx) => {
+			let path = '';
+			const x = item[ 0 ];
+			const y = item[ 1 ];
+			switch (idx) {
+				case 0:
+					const nextX = snakeArr[ 1 ][ 0 ];
+					const nextY = snakeArr[ 1 ][ 1 ];
+					path = this.getDirectionHead(x, y, nextX, nextY);
+					break;
+				case snakeLastIdx:
+					const prevX = snakeArr[ idx - 1 ][ 0 ];
+					const prevY = snakeArr[ idx - 1 ][ 1 ];
+					path = this.getDirectionTail(x, y, prevX, prevY);
+					break;
+				default:
+					const x0 = snakeArr[ idx - 1 ][ 0 ];
+					const y0 = snakeArr[ idx - 1 ][ 1 ];
+					const x1 = snakeArr[ idx + 1 ][ 0 ];
+					const y1 = snakeArr[ idx + 1 ][ 1 ];
+					path = this.getMiddlePart(x0, y0, x, y, x1, y1);
+					break;
+			}
+			this.drawPartImageSnake(path, x, y, size);
 		});
+	}
+
+	getMiddlePart(x0, y0, x, y, x1, y1) {
+		let result = '';
+		if (x0 === x && x1 === x) {
+			result = IMAGE.vertical;
+		} else if (y0 === y && y1 === y) {
+			result = IMAGE.horizontal;
+		} else if (((x0 < x && x === x1) || (x0 === x && x > x1)) && y0 <= y) {
+			result = IMAGE.turnTL;
+		} else if (((x0 === x && x < x1) || (x0 > x && x === x1)) && y1 >= y) {
+			result = IMAGE.turnTR;
+		} else if (((x0 < x && x === x1) || (x0 === x && x > x1)) && y0 >= y) {
+			result = IMAGE.turnBL;
+		} else if (((x0 === x && x < x1) || (x0 > x && x === x1)) && y1 <= y){
+			result = IMAGE.turnBR;
+		}
+		return result;
+	}
+
+	getDirectionTail(x, y, x1, y1) {
+		let result = '';
+		if (y === y1) {
+			if (x > x1) {
+				result = IMAGE.tailL;
+			} else {
+				result = IMAGE.tailR;
+			}
+		} else {
+			if (y > y1) {
+				result = IMAGE.tailT;
+			} else {
+				result = IMAGE.tailB;
+			}
+		}
+		return result;
+	}
+
+	getDirectionHead(x, y, x1, y1) {
+		let result = '';
+		if (y === y1) {
+			if (x > x1) {
+				result = IMAGE.headR;
+			} else {
+				result = IMAGE.headL;
+			}
+		} else {
+			if (y > y1) {
+				result = IMAGE.headB;
+			} else {
+				result = IMAGE.headT;
+			}
+		}
+		return result;
+	}
+
+	drawPartImageSnake(path, x, y, size) {
+		const img = new Image();
+		img.src = path;
+		this.ctx.drawImage(img, x, y, size, size);
 	}
 
 	drawScore() {
