@@ -171,14 +171,34 @@ class Snake {
 			result = IMAGE.vertical;
 		} else if (y0 === y && y1 === y) {
 			result = IMAGE.horizontal;
-		} else if (((x0 < x && x === x1) || (x0 === x && x > x1)) && y0 <= y) {
-			result = IMAGE.turnTL;
-		} else if (((x0 === x && x < x1) || (x0 > x && x === x1)) && y1 >= y) {
-			result = IMAGE.turnTR;
-		} else if (((x0 < x && x === x1) || (x0 === x && x > x1)) && y0 >= y) {
-			result = IMAGE.turnBL;
-		} else if (((x0 === x && x < x1) || (x0 > x && x === x1)) && y1 <= y){
-			result = IMAGE.turnBR;
+		} else {
+			const isHorizontal = y === y1;
+			const firstToLeft = x1 > x;
+			const secondToTop = y > y0;
+			if (isHorizontal) {
+				if (firstToLeft && secondToTop) {
+					result = IMAGE.turnTR;
+				} else if (firstToLeft && !secondToTop) {
+					result = IMAGE.turnBR;
+				} else if (!firstToLeft && secondToTop) {
+					result = IMAGE.turnTL;
+				} else if (!firstToLeft && !secondToTop) {
+					result = IMAGE.turnBL;
+				}
+			} else {
+				// is vertical
+				const firstToBottom = y > y1;
+				const secondToLeft = x > x0;
+				if (firstToBottom && secondToLeft) {
+					result = IMAGE.turnTL;
+				} else if (firstToBottom && !secondToLeft) {
+					result = IMAGE.turnTR;
+				} else if (!firstToBottom && secondToLeft) {
+					result = IMAGE.turnBL;
+				} else if (!firstToBottom && !secondToLeft) {
+					result = IMAGE.turnBR;
+				}
+			}
 		}
 		return result;
 	}
